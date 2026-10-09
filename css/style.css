@@ -1,58 +1,99 @@
 :root {
-  --bg: #2b2a28;
-  --card: #e9dcb8;
+  --paper: #ecdfb9;
+  --paper-dark: #ddcc9c;
   --ink: #7a2e1d;
-  --hole: #2b2a28;
+  --stripe: #b5452b;
+  --hole: #1b1917;
   --text: #f1ead8;
+  --muted: #b9b09a;
+  --amber: #ffb94a;
 }
 * { box-sizing: border-box; }
 body {
-  margin: 0; padding: 20px 14px;
-  background: var(--bg); color: var(--text);
-  font-family: Georgia, serif; line-height: 1.5;
+  margin: 0; padding: 28px 16px 48px;
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif; line-height: 1.55;
+  background:
+    radial-gradient(ellipse at 50% 0%, #4a443c 0%, #262320 60%, #1a1816 100%);
+  min-height: 100vh;
 }
-h1 { font-size: 1.5rem; margin: 0 0 6px; }
-p { max-width: 62ch; margin: 0 0 16px; }
+main { max-width: 1280px; margin: 0 auto; }
+header { max-width: 66ch; margin-bottom: 22px; }
+h1 { font-size: 2.2rem; margin: 0 0 8px; letter-spacing: -.01em; }
+h2 { font-size: .95rem; margin: 0 0 6px; color: var(--muted); font-weight: 600; }
+p { margin: 0; }
+
+
+.controls { display: flex; gap: 10px; flex-wrap: wrap; max-width: 720px; }
 input {
-  width: 100%; max-width: 640px; padding: 10px 12px;
-  font: 1rem "Courier New", monospace; text-transform: uppercase;
-  border: 2px solid var(--card); border-radius: 4px;
-  background: transparent; color: var(--text);
+  flex: 1 1 320px; padding: 12px 14px;
+  font: 1.1rem "Courier New", monospace; letter-spacing: .08em; text-transform: uppercase;
+  border: 2px solid #8a7b57; border-radius: 6px;
+  background: #15130f; color: var(--amber);
+  caret-color: var(--amber);
 }
-.scroll { overflow-x: auto; margin-top: 18px; padding-bottom: 10px; }
+input:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 3px rgba(255,185,74,.2); }
+.btn, .chip {
+  font: inherit; cursor: pointer; border-radius: 6px;
+  border: 2px solid #8a7b57; background: transparent; color: var(--text);
+  padding: 10px 16px;
+}
+.btn:hover, .chip:hover { background: rgba(255,255,255,.08); }
+.btn:focus-visible, .chip:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.chips { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 12px 0 0; color: var(--muted); font-size: .95rem; }
+.chip { padding: 4px 12px; font: .85rem "Courier New", monospace; border-width: 1px; border-radius: 999px; }
 
 
+.scroll { overflow-x: auto; margin-top: 22px; padding: 4px 4px 30px; }
+.shadow { display: inline-block; filter: drop-shadow(0 14px 14px rgba(0,0,0,.55)); }
 .card {
   --w: 14px;
-  display: inline-block; min-width: max-content;
-  padding: 10px 14px 14px 30px;
-  background: var(--card); color: var(--ink);
+  min-width: max-content;
+  padding: 14px 18px 18px 34px;
+  color: var(--ink);
+  border-top: 8px solid var(--stripe);
   border-radius: 6px;
-  clip-path: polygon(26px 0, 100% 0, 100% 100%, 0 100%, 0 26px);
-  box-shadow: 0 6px 18px rgba(0,0,0,.4);
+  background:
+    repeating-linear-gradient(90deg, rgba(120,90,40,.035) 0 2px, transparent 2px 6px),
+    linear-gradient(180deg, var(--paper), var(--paper-dark));
+  clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%, 0 30px);
 }
 .print, .nums, .row {
-  display: grid; grid-template-columns: 22px repeat(80, var(--w));
+  display: grid; grid-template-columns: 24px repeat(80, var(--w));
   gap: 2px; align-items: center;
 }
-.print span, .nums span {
-  text-align: center; font: 600 11px "Courier New", monospace;
-}
-.nums span { font-size: 8px; opacity: .6; }
-.print { margin-bottom: 4px; height: 16px; }
-.label { font: 700 10px "Courier New", monospace; text-align: right; padding-right: 4px; }
-
+.print { height: 20px; margin-bottom: 2px; }
+.print span { text-align: center; font: 700 13px "Courier New", monospace; }
+.nums { margin-bottom: 4px; }
+.nums span { text-align: center; font: 8px "Courier New", monospace; opacity: .55; }
+.label { font: 700 10px "Courier New", monospace; text-align: right; padding-right: 6px; }
 
 .hole {
-  width: var(--w); height: 20px; padding: 0; border: 0;
-  background: transparent; position: relative; cursor: pointer;
-  font: 9px "Courier New", monospace; color: var(--ink); opacity: .75;
+  width: var(--w); height: 22px; padding: 0; border: 0; position: relative;
+  background: transparent; cursor: pointer;
+  font: 9px "Courier New", monospace; color: var(--ink); opacity: .5;
 }
 .hole::after {
-  content: ""; position: absolute; inset: 3px 3px;
-  border-radius: 1px;
+  content: ""; position: absolute; inset: 3px 2px; border-radius: 1px;
+  transition: background .12s;
 }
-.hole.on::after { background: var(--hole); box-shadow: inset 0 1px 2px #000; }
-.hole.on { color: transparent; }
+.hole.hl { background: rgba(122,46,29,.12); opacity: .9; }
+.hole.on { color: transparent; opacity: 1; }
+.hole.on::after {
+  background: var(--hole);
+  box-shadow: inset 0 2px 3px #000, 0 1px 0 rgba(255,255,255,.45);
+  animation: punch .18s ease-out;
+}
 .hole:focus-visible { outline: 2px solid var(--ink); }
-small { display: block; margin-top: 12px; opacity: .8; }
+@keyframes punch { from { transform: scale(.2); } to { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .hole.on::after { animation: none; } }
+
+
+.panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 6px; }
+.panel { padding: 14px 16px; border: 1px solid #5b5445; border-radius: 8px; background: rgba(0,0,0,.25); }
+#info { min-height: 3em; }
+.readout {
+  font: 1.3rem "Courier New", monospace; letter-spacing: .12em; color: var(--amber);
+  min-height: 1.6em; word-break: break-all; white-space: pre-wrap;
+}
+footer { margin-top: 26px; max-width: 70ch; color: var(--muted); font-size: .92rem; }

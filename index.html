@@ -4,20 +4,47 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tarjeta perforada</title>
-<link rel="stylesheet" href="css/style.css " >
-
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Cómo funciona una tarjeta perforada</h1>
-  <p>Escribe un texto. Cada letra ocupa una columna y se codifica con huecos en las filas 12, 11, 0–9 (código Hollerith). También puedes tocar un hueco para abrirlo o cerrarlo.</p>
+<main>
+  <header>
+    <h1>La tarjeta perforada</h1>
+    <p>Una tarjeta de 80 columnas guarda un carácter por columna. Cada carácter se escribe con huecos en 12 filas (12, 11, 0 al 9): es el código Hollerith. Escribe algo o toca los huecos tú mismo.</p>
+  </header>
 
-  <input id="txt" maxlength="80" value="HOLA MUNDO" aria-label="Texto a perforar" autocomplete="off">
+  <section class="controls">
+    <input id="txt" maxlength="80" aria-label="Texto a perforar" placeholder="Escribe aquí" autocomplete="off">
+    <button type="button" class="btn" id="clear">Limpiar</button>
+  </section>
+  <div class="chips">
+    <span>Prueba con:</span>
+    <button type="button" class="chip" data-t="HOLA MUNDO">HOLA MUNDO</button>
+    <button type="button" class="chip" data-t="FORTRAN">FORTRAN</button>
+    <button type="button" class="chip" data-t="CENSO 1890">CENSO 1890</button>
+  </div>
 
   <div class="scroll">
-    <div class="card" id="card"></div>
+    <div class="shadow">
+      <div class="card" id="card"></div>
+    </div>
   </div>
-  <small>Ejemplo: la “A” perfora las filas 12 y 1; la “J”, las filas 11 y 1; la “S”, las filas 0 y 2.</small>
 
+  <section class="panels">
+    <div class="panel">
+      <h2>Columna bajo el cursor</h2>
+      <p id="info">Pasa el cursor sobre una columna para ver qué huecos la forman.</p>
+    </div>
+    <div class="panel">
+      <h2>Lo que lee la máquina</h2>
+      <p id="out" class="readout"></p>
+    </div>
+  </section>
+
+  <footer>
+    Herman Hollerith creó este sistema para el censo de los Estados Unidos de 1890. Las máquinas detectaban cada hueco con contactos eléctricos y contaban los resultados.
+  </footer>
+</main>
 <script src="script.js"></script>
 </body>
 </html>
