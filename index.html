@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarjeta perforada</title>
+<link rel="stylesheet" href="css/style.css " >
+
+</head>
+<body>
+  <h1>Cómo funciona una tarjeta perforada</h1>
+  <p>Escribe un texto. Cada letra ocupa una columna y se codifica con huecos en las filas 12, 11, 0–9 (código Hollerith). También puedes tocar un hueco para abrirlo o cerrarlo.</p>
+
+  <input id="txt" maxlength="80" value="HOLA MUNDO" aria-label="Texto a perforar" autocomplete="off">
+
+  <div class="scroll">
+    <div class="card" id="card"></div>
+  </div>
+  <small>Ejemplo: la “A” perfora las filas 12 y 1; la “J”, las filas 11 y 1; la “S”, las filas 0 y 2.</small>
+
+<script src="script.js"></script>
+</body>
+</html>
